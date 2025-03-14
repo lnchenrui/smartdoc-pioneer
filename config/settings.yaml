@@ -1,0 +1,111 @@
+# SmartDoc Pioneer 应用配置
+
+# Flask应用配置
+flask:
+  ENV: ${FLASK_ENV:development}
+  DEBUG: ${FLASK_DEBUG:true}
+  SECRET_KEY: ${SECRET_KEY:dev-key}
+  HOST: ${FLASK_HOST:0.0.0.0}
+  PORT: ${FLASK_PORT:5000}
+
+# 日志配置
+logging:
+  level: ${LOG_LEVEL:INFO}
+  file: ${LOG_FILE:app.log}
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# LLM配置
+llm:
+  provider: ${LLM_PROVIDER:openai}
+  model_name: ${LLM_MODEL:gpt-3.5-turbo}
+  temperature: ${LLM_TEMPERATURE:0.7}
+  max_tokens: ${LLM_MAX_TOKENS:1024}
+  streaming: ${LLM_STREAMING:true}
+  system_message: "你是一个有用的AI助手。"
+  api_key: ${OPENAI_API_KEY:}
+  api_base: ${OPENAI_API_BASE:}
+
+# 嵌入配置
+embedding:
+  provider: ${EMBEDDING_PROVIDER:openai}
+  model_name: ${EMBEDDING_MODEL:text-embedding-ada-002}
+  batch_size: ${EMBEDDING_BATCH_SIZE:32}
+  api_key: ${OPENAI_API_KEY:}
+  api_base: ${OPENAI_API_BASE:}
+
+# 向量存储配置
+vector_store:
+  type: ${VECTOR_STORE_TYPE:chroma}
+  persist_directory: ${VECTOR_STORE_DIR:chroma_db}
+  collection_name: ${VECTOR_STORE_COLLECTION:documents}
+
+# 搜索配置
+search:
+  default_top_k: ${SEARCH_TOP_K:5}
+  default_search_type: ${SEARCH_TYPE:similarity}
+  score_threshold: ${SEARCH_SCORE_THRESHOLD:0.5}
+
+# 索引配置
+index:
+  chunk_size: ${INDEX_CHUNK_SIZE:1000}
+  chunk_overlap: ${INDEX_CHUNK_OVERLAP:200}
+  upload_dir: ${UPLOAD_DIR:uploads}
+  supported_extensions:
+    - .txt
+    - .pdf
+    - .csv
+    - .md
+    - .html
+    - .htm
+    - .doc
+    - .docx
+    - .ppt
+    - .pptx
+    - .xls
+    - .xlsx
+    - .json
+    - .xml
+
+# RAG配置
+rag:
+  top_k: ${RAG_TOP_K:5}
+  search_type: ${RAG_SEARCH_TYPE:similarity}
+  system_message: "你是一个有用的AI助手，能够根据提供的上下文回答问题。"
+  include_sources: ${RAG_INCLUDE_SOURCES:true}
+
+# 提示配置
+prompt:
+  templates_dir: ${PROMPT_TEMPLATES_DIR:prompts}
+  rag_template: |
+    你是一个有用的AI助手。请根据以下上下文回答用户的问题。
+    如果上下文中没有足够的信息来回答问题，请诚实地说你不知道，不要编造信息。
+    
+    上下文:
+    {context}
+    
+    用户问题: {question}
+  
+  chat_template: |
+    你是一个有用的AI助手。请回答用户的问题。
+    
+    用户问题: {question}
+
+# 文档加载配置
+document_loader:
+  supported_extensions:
+    - .txt
+    - .pdf
+    - .csv
+    - .md
+    - .html
+    - .htm
+    - .doc
+    - .docx
+    - .ppt
+    - .pptx
+    - .xls
+    - .xlsx
+    - .json
+    - .xml
+  ocr_enabled: ${OCR_ENABLED:false}
+  extract_images: ${EXTRACT_IMAGES:false} 

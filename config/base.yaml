@@ -1,0 +1,53 @@
+# SmartDoc Pioneer 默认配置文件
+
+# 日志配置
+logging:
+  level: INFO
+
+# LLM配置
+llm:
+  model: qwen-max
+  api_key: ${LLM_API_KEY}
+  endpoint: ${LLM_ENDPOINT:https://api.siliconflow.cn/v1}
+  temperature: 0.7
+  max_tokens: 10240
+  top_p: 0.95
+
+# 文档配置
+document:
+  datasets_dir: datasets
+
+# 搜索配置
+search:
+  engine: elasticsearch
+  elasticsearch:
+    host: ${ELASTICSEARCH_HOST:localhost}
+    port: ${ELASTICSEARCH_PORT:9200}
+    index_name: smartdoc
+    username: ${ELASTICSEARCH_USERNAME:elastic}
+    password: ${ELASTICSEARCH_PASSWORD:7OA16M8H}
+
+# 嵌入配置
+embedding:
+  engine: openai
+  openai:
+    api_key: ${EMBEDDING_API_KEY}
+    endpoint: ${EMBEDDING_ENDPOINT:https://gds-australia-east.openai.azure.com/openai/deployments/embedding/embeddings?api-version=2023-05-15}
+    api_version: 2023-05-15
+  voyage:
+    api_key: ${VOYAGE_API_KEY:}
+    model: voyage-2
+
+# RAG配置
+rag:
+  system_message: "你是一个智能助手，可以回答用户关于文档内容的问题。请基于提供的文档内容回答问题，如果无法从文档中找到答案，请明确告知用户。"
+  chunk_size: 1000
+  chunk_overlap: 200
+  top_k: 5
+
+# API配置
+api:
+  host: 0.0.0.0
+  port: 5000
+  debug: false
+  cors_origins: "*" 
